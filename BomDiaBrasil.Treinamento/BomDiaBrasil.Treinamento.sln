@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BomDiaBrasil.Treinamento", "BomDiaBrasil.Treinamento\BomDiaBrasil.Treinamento.csproj", "{191DFA78-4816-459C-8EAE-F01F4AECE4D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{D768F056-94F8-4CD4-AB79-163AC42A2169}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Negocio", "Negocio", "{F1F295FF-7156-4F5C-9B66-B8CB69F19FA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dados", "Dados", "{ACB0C5B7-D271-4377-AB97-C1149523CCC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{432491C1-B9B3-415E-8563-C2D1881B700B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{191DFA78-4816-459C-8EAE-F01F4AECE4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191DFA78-4816-459C-8EAE-F01F4AECE4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191DFA78-4816-459C-8EAE-F01F4AECE4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191DFA78-4816-459C-8EAE-F01F4AECE4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{432491C1-B9B3-415E-8563-C2D1881B700B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{432491C1-B9B3-415E-8563-C2D1881B700B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{432491C1-B9B3-415E-8563-C2D1881B700B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{432491C1-B9B3-415E-8563-C2D1881B700B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{191DFA78-4816-459C-8EAE-F01F4AECE4D3} = {D768F056-94F8-4CD4-AB79-163AC42A2169}
+		{432491C1-B9B3-415E-8563-C2D1881B700B} = {ACB0C5B7-D271-4377-AB97-C1149523CCC8}
+	EndGlobalSection
+EndGlobal
