@@ -8,6 +8,8 @@ namespace BomDiaBrasil.Treinamento
     {
         static void Main(string[] args)
         {
+            Comentario c = new Comentario();
+            c.Id = 1;
             List<Profissao> p = new List<Profissao>();
             p.Add(new Profissao
             {

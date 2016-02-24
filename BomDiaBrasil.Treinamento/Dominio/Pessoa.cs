@@ -2,8 +2,29 @@
 
 namespace Dominio
 {
+    /// <summary>
+    /// Olha essa class ser[a uma classe abstrata para pessoas
+    /// </summary>
     public abstract class Pessoa
     {
+        //como seria no Java
+        /*
+        */
+        /// <summary>
+        /// 
+        /// </summary>
+        //private long id;
+
+        //public long getId()
+        //{
+        //    return id;
+        //}
+
+        //public void setId(long id)
+        //{
+        //    this.id = id;
+        //}
+
         public long Id { get; set; }
         public string Nome { get; set; }
         public string SobreNome { get; set; }
@@ -14,7 +35,7 @@ namespace Dominio
         {
             get
             {
-                if (Nome.Equals("Márcio"))
+                if (Nome == "Márcio")
                     return Nome + " " + SobreNome;
                 else
                 {
@@ -22,6 +43,11 @@ namespace Dominio
                         return SobreNome + ", " + Nome;
                     else return Nome;
                 }
+            }
+
+            set
+            {
+                Nome = value;
             }
         }
 
