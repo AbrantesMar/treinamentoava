@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dados", "Dados", "{ACB0C5B7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{432491C1-B9B3-415E-8563-C2D1881B700B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BomDiaBrasilTreinamento.Web", "BomDiaBrasilTreinamento.Web\BomDiaBrasilTreinamento.Web.csproj", "{FA8E5B3D-7220-478D-876F-AB3ECAC69A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BomDiaBrasilTreinamento.Web.Tests", "BomDiaBrasilTreinamento.Web.Tests\BomDiaBrasilTreinamento.Web.Tests.csproj", "{08928CAE-C998-4555-B704-2CD643DDA83E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{432491C1-B9B3-415E-8563-C2D1881B700B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{432491C1-B9B3-415E-8563-C2D1881B700B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{432491C1-B9B3-415E-8563-C2D1881B700B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA8E5B3D-7220-478D-876F-AB3ECAC69A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8E5B3D-7220-478D-876F-AB3ECAC69A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8E5B3D-7220-478D-876F-AB3ECAC69A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8E5B3D-7220-478D-876F-AB3ECAC69A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08928CAE-C998-4555-B704-2CD643DDA83E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08928CAE-C998-4555-B704-2CD643DDA83E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08928CAE-C998-4555-B704-2CD643DDA83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08928CAE-C998-4555-B704-2CD643DDA83E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,5 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{191DFA78-4816-459C-8EAE-F01F4AECE4D3} = {D768F056-94F8-4CD4-AB79-163AC42A2169}
 		{432491C1-B9B3-415E-8563-C2D1881B700B} = {ACB0C5B7-D271-4377-AB97-C1149523CCC8}
+		{FA8E5B3D-7220-478D-876F-AB3ECAC69A76} = {D768F056-94F8-4CD4-AB79-163AC42A2169}
+		{08928CAE-C998-4555-B704-2CD643DDA83E} = {D768F056-94F8-4CD4-AB79-163AC42A2169}
 	EndGlobalSection
 EndGlobal
