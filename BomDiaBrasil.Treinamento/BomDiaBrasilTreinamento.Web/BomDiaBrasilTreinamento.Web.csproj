@@ -237,6 +237,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ComentarioApiController.cs" />
     <Compile Include="Controllers\ComentarioController.cs" />
+    <Compile Include="Controllers\ComentariosApiController.cs" />
+    <Compile Include="Controllers\EmpregadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -287,6 +289,7 @@
     </Content>
     <Content Include="Areas\AreaTeste\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\controleJs.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -323,6 +326,7 @@
     <Folder Include="Areas\AreaTeste\Controllers\" />
     <Folder Include="Areas\AreaTeste\Models\" />
     <Folder Include="Areas\AreaTeste\Views\Shared\" />
+    <Folder Include="Views\Empregado\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
