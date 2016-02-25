@@ -12,11 +12,21 @@ namespace BomDiaBrasilTreinamento.Web.Models
 
         public BomDiaBrasilContext() : base("TreinamentoDb")
         {
-            // DbModelBuilder modelBuilder
-            //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //modelBuilder.Entity<Reportagem>().HasMany(r => r.Comentarios);
-            //modelBuilder.Entity<Reportagem>().HasMany(r => r.Participantes);
-            //modelBuilder.Entity<Reportagem>().HasMany(r => r.Equipe);
+
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Reportagem>()
+                .HasRequired(r => r.Equipe);
+            modelBuilder.Entity<Reportagem>()
+                .HasRequired(r => r.Comentarios);
+            modelBuilder.Entity<Reportagem>()
+                .HasRequired(r => r.Participantes);
+        }
+
+        public System.Data.Entity.DbSet<Dominio.Comentario> Comentarios { get; set; }
     }
 }

@@ -1,39 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
+using System.Web.Mvc;
+using BomDiaBrasilTreinamento.Web.Models;
+using Dominio;
 
 namespace BomDiaBrasilTreinamento.Web.Controllers
 {
-    public class ComentarioController : ApiController
+    public class ComentarioController : Controller
     {
-        // GET: api/Comentario
-        public IEnumerable<string> Get()
+        private BomDiaBrasilContext db = new BomDiaBrasilContext();
+
+        // GET: Comentario
+        public ActionResult Index()
         {
-            return new string[] { "Márcio", "Abrantes" };
+            return View(db.Comentarios.ToList());
         }
 
-        // GET: api/Comentario/5
-        public string Get(int id)
+        // GET: Comentario/Details/5
+        public ActionResult Details(int? id)
         {
-            return "value";
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comentario comentario = db.Comentarios.Find(id);
+            if (comentario == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comentario);
         }
 
-        // POST: api/Comentario
-        public void Post([FromBody]string value)
+        // GET: Comentario/Create
+        public ActionResult Create()
         {
+            return View();
         }
 
-        // PUT: api/Comentario/5
-        public void Put(int id, [FromBody]string value)
+        // POST: Comentario/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Nome,Email,Descricao")] Comentario comentario)
         {
+            if (ModelState.IsValid)
+            {
+                db.Comentarios.Add(comentario);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(comentario);
         }
 
-        // DELETE: api/Comentario/5
-        public void Delete(int id)
+        // GET: Comentario/Edit/5
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comentario comentario = db.Comentarios.Find(id);
+            if (comentario == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comentario);
+        }
+
+        // POST: Comentario/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Nome,Email,Descricao")] Comentario comentario)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(comentario).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(comentario);
+        }
+
+        // GET: Comentario/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comentario comentario = db.Comentarios.Find(id);
+            if (comentario == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comentario);
+        }
+
+        // POST: Comentario/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Comentario comentario = db.Comentarios.Find(id);
+            db.Comentarios.Remove(comentario);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
