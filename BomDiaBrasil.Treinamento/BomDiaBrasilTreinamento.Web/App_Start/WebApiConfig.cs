@@ -12,6 +12,7 @@ namespace BomDiaBrasilTreinamento.Web
     {
         public static void Register(HttpConfiguration config)
         {
+            #region Configuração da Api
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
@@ -25,6 +26,15 @@ namespace BomDiaBrasilTreinamento.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            #endregion
+
+            #region Definir Json para Web API
+            //var json = config.Formatters.JsonFormatter;
+            //json.SerializerSettings.PreserveReferencesHandling =
+            //    Newtonsoft.Json.PreserveReferencesHandling.Objects;
+
+            //config.Formatters.Remove(config.Formatters.XmlFormatter);
+            #endregion
         }
     }
 }

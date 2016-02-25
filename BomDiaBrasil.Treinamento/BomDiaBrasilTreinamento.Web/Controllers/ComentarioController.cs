@@ -9,6 +9,11 @@ using System.Web.Mvc;
 using BomDiaBrasilTreinamento.Web.Models;
 using Dominio;
 using System.Data.SqlClient;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Runtime.Serialization.Json;
 
 namespace BomDiaBrasilTreinamento.Web.Controllers
 {
@@ -17,47 +22,65 @@ namespace BomDiaBrasilTreinamento.Web.Controllers
         private BomDiaBrasilContext db = new BomDiaBrasilContext();
 
         // GET: Comentario
-        public ActionResult Index()
+        public async System.Threading.Tasks.Task<ActionResult> Index()
         {
-            string connectionString =
-            "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=BomDiaBrasilTreinamento; Integrated Security=true";
+            #region Consulta JSON
+            HttpClient httpClientTeste = new HttpClient();
+            httpClientTeste.DefaultRequestHeaders.Accept.TryParseAdd("application/json");
+            //UriApi
+            var uriId = "http://localhost:33157/api/ComentariosApi";
 
-            // Provide the query string with a parameter placeholder.
-            string queryString = "SELECT Id,Nome,Email,Descricao FROM Comentarios";
+            string ResponseStringTeste = await httpClientTeste.GetStringAsync(new Uri(uriId));
+            var jsonTeste = JsonConvert.DeserializeObject<List<Comentario>>(ResponseStringTeste);
 
-            // Specify the parameter value.
-            //int paramValue = 5;
+            #endregion
+            #region Consultar com ADO
+            //string connectionString =
+            //"Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=BomDiaBrasilTreinamento; Integrated Security=true";
 
-            // Create and open the connection in a using block. This
-            // ensures that all resources will be closed and disposed
-            // when the code exits.
-            using (SqlConnection connection =
-                new SqlConnection(connectionString))
-            {
-                // Create the Command and Parameter objects.
-                SqlCommand command = new SqlCommand(queryString, connection);
-               //command.Parameters.AddWithValue("@id", paramValue);
+            //// Provide the query string with a parameter placeholder.
+            //string queryString = "SELECT Id,Nome,Email,Descricao FROM Comentarios";
 
-                // Open the connection in a try/catch block. 
-                // Create and execute the DataReader, writing the result
-                // set to the console window.
-                try
-                {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        Console.WriteLine("Id: \t{0} Nome: \t{1} Email: \t{2}", reader[0], reader[1], reader[2]);
-                    }
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                Console.ReadLine();
-            }
-            return View(db.Comentarios.ToList());
+            //// Specify the parameter value.
+            ////int paramValue = 5;
+
+            //// Create and open the connection in a using block. This
+            //// ensures that all resources will be closed and disposed
+            //// when the code exits.
+            //using (SqlConnection connection =
+            //    new SqlConnection(connectionString))
+            //{
+            //    // Create the Command and Parameter objects.
+            //    SqlCommand command = new SqlCommand(queryString, connection);
+            //    //command.Parameters.AddWithValue("@id", paramValue);
+
+            //    // Open the connection in a try/catch block. 
+            //    // Create and execute the DataReader, writing the result
+            //    // set to the console window.
+            //    try
+            //    {
+            //        connection.Open();
+            //        SqlDataReader reader = command.ExecuteReader();
+            //        while (reader.Read())
+            //        {
+            //            Console.WriteLine("Id: \t{0} Nome: \t{1} Email: \t{2}", reader[0], reader[1], reader[2]);
+            //        }
+            //        reader.Close();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //    Console.ReadLine();
+            //}
+            #endregion
+
+            #region Retorno com json
+            return View(jsonTeste);
+            #endregion
+            #region Retorno com entity
+            //return View(db.Comentarios.ToList());
+            #endregion
         }
 
         // GET: Comentario/Details/5
@@ -86,12 +109,27 @@ namespace BomDiaBrasilTreinamento.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Email,Descricao")] Comentario comentario)
+        public async System.Threading.Tasks.Task<ActionResult> Create([Bind(Include = "Id,Nome,Email,Descricao")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
-                db.Comentarios.Add(comentario);
-                db.SaveChanges();
+                #region Criação com WebApi
+                using (var client = new System.Net.Http.HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var json_object = JsonConvert.SerializeObject(comentario);
+                    var response = await client.PostAsync("http://localhost:33157/api/ComentariosApi/", new StringContent(json_object.ToString(), Encoding.Unicode, "application/json"));
+                    var dataReceived = response.StatusCode;
+                    var dRec = new DataContractJsonSerializer(typeof(Comentario));
+                }
+                #endregion
+
+                #region Criação com entity
+                //db.Comentarios.Add(comentario);
+                //db.SaveChanges();
+                #endregion
+
                 return RedirectToAction("Index");
             }
 
@@ -99,13 +137,23 @@ namespace BomDiaBrasilTreinamento.Web.Controllers
         }
 
         // GET: Comentario/Edit/5
-        public ActionResult Edit(int? id)
+        public async System.Threading.Tasks.Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comentario comentario = db.Comentarios.Find(id);
+            #region Consulta com WepApi Json
+            HttpClient httpClientTeste = new HttpClient();
+            httpClientTeste.DefaultRequestHeaders.Accept.TryParseAdd("application/json");
+            //UriApi
+            var uriId = "http://localhost:33157/api/ComentariosApi/" + id;
+
+            string ResponseStringTeste = await httpClientTeste.GetStringAsync(new Uri(uriId));
+            var jsonTeste = JsonConvert.DeserializeObject<Comentario>(ResponseStringTeste);
+            Comentario comentario = jsonTeste;
+            #endregion
+            //Comentario comentario = db.Comentarios.Find(id);
             if (comentario == null)
             {
                 return HttpNotFound();
