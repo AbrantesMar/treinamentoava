@@ -39,6 +39,36 @@
                 @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div>
+            <ul id="idListPessoas" class="clListPessoas">
+
+            </ul>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $.ajax({
+                        url: '@Url.Action("ListPessoa", "Comentario")',
+                        type: "GET",
+                        data: {
+                            term: "Marcio"
+                        },
+                        success: function (data, textStatus, jqXHR) {
+                            //data - response from server
+                            for (var i = 0, count = data.length; i < count; i++) {
+                                $("#idListPessoas").append("<li>"+
+                                                          " <label>"+data[i]+"</label>"+
+                                                          "</li>");
+                                $(".clListPessoas").append("<li>" +
+                                                          " <label>" + data[i] + "</label>" +
+                                                          "</li>");
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert("erro");
+                        }
+                    });
+                })
+            </script>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

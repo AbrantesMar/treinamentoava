@@ -17,6 +17,17 @@ namespace BomDiaBrasilTreinamento.Web.Controllers
     {
         private BomDiaBrasilContext db = new BomDiaBrasilContext();
 
+        [HttpGet]
+        public ActionResult ListPessoa(string term)
+        {
+            List<string> Name = new List<string>();
+            Name.Add("Márcio");
+            Name.Add("Henrique");
+            Name.Add("Nunes");
+
+            return Json(Name, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Comentario
         public async System.Threading.Tasks.Task<ActionResult> Index()
         {
